@@ -38,12 +38,14 @@ public class TestBase {
 	public static void initialization(){
 		String browserName = prop.getProperty("browser");
 		
-		if(browserName.equals("chrome")){
-			System.setProperty("webdriver.chrome.driver", "D:\\JavaWorkSpace\\exefiles_new\\chromedriver.exe");	
+		String chromeExe=System.getProperty("user.dir")+"/ExecutableFiles/chromedriver.exe";
+		String FirefoxExe=System.getProperty("user.dir")+"/ExecutableFiles/geckodriver.exe";
+		if(browserName.equalsIgnoreCase("chrome")){
+			System.setProperty("webdriver.chrome.driver", chromeExe);	
 			driver = new ChromeDriver(); 
 		}
-		else if(browserName.equals("FF")){
-			System.setProperty("webdriver.gecko.driver", "D:\\JavaWorkSpace\\exefiles_new\\geckodriver.exe");	
+		else if(browserName.equalsIgnoreCase("Firefox")){
+			System.setProperty("webdriver.gecko.driver", FirefoxExe);	
 			driver = new FirefoxDriver(); 
 		}
 		
@@ -60,7 +62,7 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 		
 		driver.get(prop.getProperty("url"));
-		
+		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 	}
 	
 	
